@@ -1,0 +1,48 @@
+﻿@*@model Market.Web.Models.UserVM*@
+
+
+
+
+@using (Html.BeginForm("Index", "Home", FormMethod.Post))
+{
+    <div>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    </div>
+
+
+    <div>
+        @Html.Label("User Name")
+    </div>
+    <div>
+        @Html.TextBox("User Name","", new { Name = "username" })
+    </div>
+    <div>
+        @Html.ValidationMessage("User Name", "", new { @class = "text-danger" })
+        <div />
+
+
+
+        <div>
+            @Html.Label("Password")
+        </div>
+        <div>
+            @Html.Password("Password","", new { Name = "password" })
+        </div>
+        <div>
+            @Html.ValidationMessage("Password", "", new { @class = "text-danger" })
+        </div>
+   
+        <div>
+            <input type="submit" value="LogIn" />
+            @Html.ActionLink("Register", "Register")
+        </div>
+        @if (ViewBag.loginError != null)
+        {<div class="error">@ViewBag.loginError</div>
+    }
+
+    </div>
+
+}
+
+
+

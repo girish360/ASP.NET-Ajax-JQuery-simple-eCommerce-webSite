@@ -1,0 +1,29 @@
+﻿@model Market.Web.Models.UserVM
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<h2>Index</h2>
+
+@section LogIn{
+    @if (Request.Cookies["user"] == null)
+    {
+        @Html.Partial("_LogIn")
+    }
+    else
+    {
+        @Html.Partial("_Welcom")
+    }
+}
+
+@section Center{
+
+    @Html.Partial("_Market")
+}
+
+
+@section Menu{
+    @Html.Partial("_Menu")
+}

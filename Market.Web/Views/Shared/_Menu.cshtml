@@ -1,0 +1,53 @@
+﻿@*@model Market.Web.Models.UserVM*@
+<div>
+    <h2>Website Map</h2>
+
+    @if (ViewBag.Page != "Index")
+        {<div>@Html.ActionLink("Main Page", "Index")</div> }
+    else
+        {<div>Main Page</div>}
+
+
+
+    @if (Request.Cookies["user"] != null)
+    {
+
+        if (ViewBag.Page != "Register")
+        {<div>@Html.ActionLink("Personal Information", "Register")</div>}
+        else
+        {<div>Personal Information</div>}
+    }
+    else
+    {
+        if (ViewBag.Page != "Register")
+        {<div>@Html.ActionLink("Register", "Register")</div>}
+        else
+        {<div>Register</div>}
+    }
+
+
+
+    @if (ViewBag.Page != "AboutUs")
+        {<div>@Html.ActionLink("About Us", "AboutUs")</div>}
+    else
+        {<div>About Us</div>}
+
+
+
+    @if (ViewBag.Page != "Cart")
+        {<div>@Html.ActionLink("My Cart", "Cart")</div>}
+    else
+        {<div>My Cart</div>}
+
+
+
+    @if (Request.Cookies["user"] != null)
+    {
+        if (ViewBag.Page != "InsertProduct")
+        {
+            <div>@Html.ActionLink("Post a Product", "InsertProduct")</div>}
+        else
+            {<div>Post a Product</div>}
+    }
+
+</div>

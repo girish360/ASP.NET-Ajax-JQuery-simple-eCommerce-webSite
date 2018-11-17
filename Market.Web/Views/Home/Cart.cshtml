@@ -1,0 +1,197 @@
+﻿@*@model IEnumerable<Market.Web.Models.ProductVM>*@
+@model Market.Web.Models.UserVM
+
+@{
+    ViewBag.Title = "Cart";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.3.js"></script>
+<script src="http://ajax.aspnetcdn.com/ajax/mvc/3.0/jquery.unobtrusive-ajax.min.js"></script>
+
+
+<h2>Cart</h2>
+@section LogIn{
+    @if (Request.Cookies["user"] == null)
+    {
+        @Html.Partial("_LogIn")
+    }
+    else
+    {
+        @Html.Partial("_Welcom")
+    }
+}
+
+@section Center{
+
+<link href="~/Style/CartStyle.css" rel="stylesheet" />
+<script type="text/javascript">
+        var tot;
+
+    function foo() {
+        var BuyList = [];
+        let checkedArray = $("input:checked");
+        let m = $("input:checked").length;
+        for (let i = 0; i < m; i++) {
+            BuyList.push($(checkedArray[i]).attr('id'));
+        };
+
+
+        //var UnBuyList = [];
+        //let UncheckedArray = $("input:checkbox:not(:checked)");
+        //let cnt = $("input:checkbox:not(:checked)").length;
+        //for (let i = 0; i < cnt; i++) {
+        //    BuyList.push($(UncheckedArray[i]).attr('id'));
+        //};
+
+        
+
+        var url = '@Url.Action("Buy", "Home", new { BoughtList = "__id__"})';  //, NoBoughtList = "__id2__"
+
+        window.location.href = url.replace('__id__', BuyList);  //.replace('__id2__', UnBuyList)
+}
+
+
+        function Buy(isUser) {
+            if (isUser) {
+                tot = tot * 0.9;
+            }
+            let thks = String("Thank you for your Purchase: " + tot + "$");
+            alert(thks);
+            foo();
+        }
+
+        $(document).ready(function () {
+
+            var countChecked = function () {
+
+                var checkedArr = $("input:checked");
+                var n = $("input:checked").length;
+                tot = 0;
+                for (let i = 0; i < n; i++) {
+
+                    tot = tot + parseFloat($(checkedArr[i]).attr('price'));
+                    //var ind = checkedArr[i].id;
+                    //tot = tot + $(`th.${ind}`).attr('')
+
+                };
+                //let txt = (n + (n === 1 ? " is" : " are") + " checked!");
+                //let element = $(`<div>${txt}</div>`).css({ 'font-weight': 'bold' });
+
+
+                $('.Pricecontainer').text(Math.round(tot));
+                $('.Pricecontainer3').text(String("you could have saved $" +Math.round(tot*0.1)+" if you were member.. Subcribe Now!" ));
+                $('.Pricecontainer2').text(Math.round(tot * 0.9));
+            };
+
+            countChecked();
+
+            //$(".btnBuy").click(function () {
+            //    let thks = String("Thank you for your Purchase: " + tot + "$");
+            //    alert(thks);
+            //});
+
+
+
+            $("input[type=checkbox]").on("click", countChecked);
+
+
+        });
+</script>
+
+
+
+    @if (Session["cart"] != null)
+    {
+
+<table>
+    <tr>
+        <th class="tableTitle"></th>
+        <th class="tableTitle">Title</th>
+        <th class="tableTitle">Description</th>
+        <th class="tableTitle">Price</th>
+    </tr>
+    @foreach (var item in Model.Cart)
+    {
+        <tr>
+            <th>@Html.CheckBox(item.Title, true, new { id = item.ID, price = item.Price }) </th>
+            <th>@item.Title</th>
+            <th>@item.ShortDescription   </th>
+            <th class="@item.ID">$ @item.Price</th>
+        </tr>
+    }
+    <tr>
+    <tr/>
+    <tr>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th>
+            @if (Request.Cookies["user"] == null)
+            {
+            <div>The Total is:   $ <span class="Pricecontainer"></span></div><br />
+            <div><small class="Pricecontainer3"></small></div>
+
+            }
+            else
+            {
+            <div>The Total is:   $ <span class="Pricecontainer2"></span></div>
+            }
+
+        </th>
+
+
+    </tr>
+
+</table>
+
+        if (Request.Cookies["user"] == null)
+        {
+            <button onclick="Buy(false)" class="btnBuy">Buy!</button>
+        }
+        else
+        {
+            <button onclick="Buy(true)" class="btnBuy">Buy!</button>
+        }
+
+
+
+
+
+
+
+
+        @*<script type="text/javascript">
+                $(document).ready(function () {
+
+
+                    let cbArr = $('input:checkbox');
+                    let total = 0;
+                    for (var i = 0; i < cbArr.length; i++) {
+                        Total = Total + cbArr[i].attr('price').val();
+                    }
+
+                    let element = $(`<div>${total}</div>`).css({ 'font-weight': 'bold' });
+
+                    $('.container')
+                        .append(element);
+
+                });
+            </script>*@
+
+
+    }
+    
+
+
+
+
+}
+
+
+@section Menu{
+    @Html.Partial("_Menu")
+}
+

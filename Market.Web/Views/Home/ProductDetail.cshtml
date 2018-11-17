@@ -1,0 +1,104 @@
+﻿@model Market.Web.Models.ProductVM
+
+@{
+    ViewBag.Title = "ProductDetail";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+@section LogIn{
+    @if (Request.Cookies["user"] == null)
+    {
+        @Html.Partial("_LogIn")
+    }
+    else
+    {
+        @Html.Partial("_Welcom")
+    }
+}
+
+
+
+@section Menu{
+    @Html.Partial("_Menu")
+}
+
+
+
+
+
+
+
+@section Center{
+
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link href="~/Style/MarketSheet.css" rel="stylesheet" />
+    <script src="~/Style/MarketStyle.js"></script>
+
+
+    <div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="panel panel-default  panel--styled">
+                        <div class="panel-body">
+                            <div class="col-md-12 panelTop">
+                                <div class="col-md-4">
+                                    @if (Model.Picture1 == null)
+                                {
+                                    <img class="img-responsive" src="http://placehold.it/350x350" alt="" />
+                            }
+                            else
+                            {
+                                var base64 = Convert.ToBase64String(Model.Picture1);
+                                var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                                <img class="img-responsive" src="@imgSrc" alt="" />
+                        }
+                                </div>
+                                <div class="col-md-4">
+                                    @if (Model.Picture2 != null)
+                                {
+                                    var base64 = Convert.ToBase64String(Model.Picture2);
+                                    var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                                    <img class="img-responsive" src="@imgSrc" alt="" />
+                            }
+                                </div>
+                                <div class="col-md-4">
+                                    @if (Model.Picture3 != null)
+                                {
+                                    var base64 = Convert.ToBase64String(Model.Picture3);
+                                    var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                                    <img class="img-responsive" src="@imgSrc" alt="" />
+                            }
+                                </div>
+                                <div class="col-md-8">
+                                    <h2>@Model.Title</h2>
+                                    <p>@Model.Date</p>
+                                    <p>@Model.ShortDescription</p>
+                                    <p>@Model.LongDescription</p>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 panelBottom">
+                                <div class="col-md-4 text-center">
+                                    <button class="btn btn-lg btn-add-to-cart" onclick="location.href='@Url.Action("AddToCart", "Home", new { id = Model.ID })'"><span class="glyphicon glyphicon-shopping-cart"></span>   Add to Cart</button>
+
+                                </div>
+                                <div class="col-md-4 text-left">
+                                    <h5>Price <span class="itemPrice">$@Model.Price</span></h5>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+}

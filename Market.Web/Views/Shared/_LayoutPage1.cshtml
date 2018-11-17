@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.3.js"></script>
+
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/mvc/3.0/jquery.unobtrusive-ajax.min.js"></script>
+
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Style/StyleSheet1.css" rel="stylesheet" />
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+
+    <div class="container">
+
+        <header>
+            <img src="~/Image/MyLogo.png" />
+            <h1>Welcome To UltimaStore</h1>
+            <h2>@ViewBag.Title</h2>
+        </header>
+
+
+        <div class="row">
+            <div class="leftcolumn">
+                <div class="card">
+                    <section>
+                        @RenderSection("LogIn")
+                    </section>
+                    
+
+                </div>
+                <div class="card">
+                    <nav>
+
+                        @RenderSection("Menu", false)
+                    </nav>
+                </div>
+            </div>
+
+            <div class="rightcolumn">
+                <div class="card">
+                    <article>
+                        <div>
+                            @RenderBody()
+                            @RenderSection("Center",false)
+                        </div>
+                    </article>
+                </div>
+                <div class="card">
+                    <h3>Follow Me</h3>
+                    <p>Fb Twt Insta</p>
+                </div>
+            </div>
+        </div>
+
+
+
+
+       
+
+
+
+        <footer>
+            &copy; @DateTime.Now.Year - The Super Website To buy Everythink!!!
+        </footer>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,32 @@
+﻿@*@model Market.Web.Models.ActualUser*@
+
+
+<div>
+    @if (DateTime.Now.Hour >= 22 || DateTime.Now.Hour < 5)
+    {
+        <span>Good Night</span>
+    }
+    else if (DateTime.Now.Hour >= 18 && DateTime.Now.Hour < 22)
+    {
+        <span>Good Evening</span>
+    }
+    else if (DateTime.Now.Hour >= 12 && DateTime.Now.Hour < 18)
+    {
+        <span>Good Afternoon</span>
+
+    }
+    else if (DateTime.Now.Hour > 6 && DateTime.Now.Hour <= 10)
+    {
+        <span>Good Morning</span>
+
+    }
+    else
+    {
+        <span>Hello</span>
+
+    }
+
+
+    @Request.Cookies["user"]["firstName"]  @Request.Cookies["user"]["lastName"]
+</div>
+    <div>@Html.ActionLink("LogOut", "LogOut")</div>

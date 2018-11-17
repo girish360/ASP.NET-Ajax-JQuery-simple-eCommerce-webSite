@@ -1,0 +1,82 @@
+﻿@model Market.Web.Models.ProductVM
+
+@{
+    ViewBag.Title = "InsertProduct";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<link href="~/Style/FormStyle.css" rel="stylesheet" />
+<h2>InsertProduct</h2>
+
+@section LogIn{
+
+@Html.Partial("_Welcom")
+}
+
+
+@section Menu{
+    @Html.Partial("_Menu")
+}
+
+
+@section Center{
+    @*"InsertProduct", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }*@
+    @using (Html.BeginForm("InsertProduct", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+
+<fieldset>
+    <legend>Publish a Product</legend>
+    <div>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    </div>
+
+    <table>
+        <tr>
+            <th>@Html.LabelFor(model => model.Title)</th>
+            <th>@Html.TextBoxFor(model => model.Title)</th>
+            <th>@Html.ValidationMessageFor(model => model.Title)</th>
+        </tr>
+        <tr>
+            <th>@Html.LabelFor(model => model.ShortDescription)</th>
+            <th>@Html.TextBoxFor(model => model.ShortDescription)</th>
+            <th>@Html.ValidationMessageFor(model => model.ShortDescription)</th>
+        </tr>
+        <tr>
+            <th>@Html.LabelFor(model => model.LongDescription)</th>
+            <th>@Html.TextAreaFor(model => model.LongDescription)</th>
+            <th>@Html.ValidationMessageFor(model => model.LongDescription)</th>
+        </tr>
+        <tr>
+            <th>@Html.LabelFor(model => model.Price)</th>
+            <th>@Html.TextBoxFor(model => model.Price)</th>
+            <th>@Html.ValidationMessageFor(model => model.Price)</th>
+        </tr>
+        <tr>
+            <th>@Html.LabelFor(model => model.Picture1)</th>
+            <th><input name="image1" type="file" value="image1" id="image1" /></th>
+            @*<th>@Html.TextBoxFor(m => m.Picture1, new { type = "file", name = "image1" })</th>*@
+            <th>@Html.ValidationMessageFor(model => model.Picture1)</th>
+        </tr>
+        <tr>
+            <th>@Html.LabelFor(model => model.Picture2)</th>
+            <th><input name="image2" type="file" value="image2" id="image2" /></th>
+            @*<th>@Html.TextBoxFor(m => m.Picture2, new { type = "file", name = "image2" })</th>*@
+            <th>@Html.ValidationMessageFor(model => model.Picture2)</th>
+        </tr>
+        <tr>
+            <th>@Html.LabelFor(model => model.Picture3)</th>
+            <th><input name="image3" type="file" value="image3" id="image3" /></th>
+            @*<th>@Html.TextBoxFor(m => m.Picture3, new { type = "file", name = "image3" })</th>*@
+            <th>@Html.ValidationMessageFor(model => model.Picture3)</th>
+        </tr>
+
+    </table>
+    <br />
+    <input type="submit" value="Add a Product" />
+</fieldset>
+    }
+
+
+
+}

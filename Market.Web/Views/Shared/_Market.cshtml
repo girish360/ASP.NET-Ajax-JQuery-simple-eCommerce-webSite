@@ -1,0 +1,129 @@
+﻿@*@model Market.Web.Models.UserVM*@
+
+
+
+@*<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />*@
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.3.js"></script>
+<script src="http://ajax.aspnetcdn.com/ajax/mvc/3.0/jquery.unobtrusive-ajax.min.js"></script>
+
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="~/Style/MarketStyle.js"></script>
+<link href="~/Style/MarketSheet.css" rel="stylesheet" />
+
+
+
+<div>
+    <table width="80%">
+        <tr>
+            <th>
+
+                @Ajax.ActionLink("Sort By Name", "_MarketByName", new AjaxOptions
+                {
+                    InsertionMode = InsertionMode.Replace,
+                    UpdateTargetId = "tableResult",
+                    HttpMethod = "POST",
+                    OnFailure = "ErreurAfficheTableau"
+
+
+                })
+            </th>
+            <th>
+
+                @Ajax.ActionLink("Sort By Date", "_MarketByDate", new AjaxOptions
+                {
+                    InsertionMode = InsertionMode.Replace,
+                    UpdateTargetId = "tableResult",
+                    HttpMethod = "POST",
+                    OnFailure = "ErreurAfficheTableau"
+
+                })
+            </th>
+            <th>
+
+                @Ajax.ActionLink("Sort By Price", "_MarketByPrice", new AjaxOptions
+                {
+                    InsertionMode = InsertionMode.Replace,
+                    UpdateTargetId = "tableResult",
+                    HttpMethod = "POST",
+                    OnFailure = "ErreurAfficheTableau"
+
+                })
+            </th>
+
+        </tr>
+    </table>
+
+</div>
+
+
+
+<div id="tableResult">
+    @if (ViewBag.Products != null)
+    {
+        if (@ViewBag.Products.Count > 0)
+        {
+            foreach (var item in @ViewBag.Products)
+            {
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="panel panel-default  panel--styled">
+                                <div class="panel-body">
+                                    <div class="col-md-12 panelTop">
+                                        <div class="col-md-4">
+                                            @if (item.Picture1 == null)
+                                            {
+                                                <img class="img-responsive" src="http://placehold.it/350x350" alt="" /> @*Intégrer les images*@
+                                            }
+                                            else
+                                            {
+                                                var base64 = Convert.ToBase64String(item.Picture1);
+                                                var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                                                <img class="img-responsive" src="@imgSrc" alt="" />
+                                            }
+                                        </div>
+                                        <div class="col-md-8">
+                                            <h2>@item.Title</h2>
+                                            <p>@item.Date</p>
+                                            <p>@item.ShortDescription</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12 panelBottom">
+                                        <div class="col-md-4 text-center">
+                                            <button class="btn btn-lg btn-add-to-cart" onclick="location.href='@Url.Action("AddToCart", "Home", new { id = item.ID })'"><span class="glyphicon glyphicon-shopping-cart"></span>   Add to Cart</button>                                           
+                                        </div>
+                                        <div class="col-md-4 text-left">
+                                            <h5>Price <span class="itemPrice">$@item.Price</span></h5>
+                                        </div>
+                                        <div class="col-md-4 text-center">
+                                            <button class="btn btn-lg btn-add-to-cart" onclick="location.href='@Url.Action("ProductDetail", "Home", new { id = item.ID })'">   More Detail</button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            }
+        }
+    }
+</div>
+
+<script type="text/javascript">
+    function ErreurAfficheTableau() {
+        $("#tableResult").html("An error happen, try again ...");
+    }
+</script>
+
+
+

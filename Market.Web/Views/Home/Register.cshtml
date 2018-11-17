@@ -1,0 +1,112 @@
+﻿@model Market.Web.Models.UserVM
+
+@{
+    /**/
+
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+<link href="~/Style/FormStyle.css" rel="stylesheet" />
+<script src="~/Style/JQuery.js"></script>
+
+<h2>Register</h2>
+@section LogIn{
+    @if (Request.Cookies["user"] == null)
+    {
+        @Html.Partial("_LogIn")
+    }
+    else
+    {
+        @Html.Partial("_Welcom")
+    }
+}
+
+@section Menu{
+    @Html.Partial("_Menu")
+}
+
+
+@section Center{
+
+
+
+    @if (ViewBag.Message != null)
+    {<div style="color:red">@ViewBag.Message</div>}
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+    $('#password, #confirm_password').on('keyup', function () {
+            if ($('#password').val() == $('#confirm_password').val()) {
+                $('#errorMessage').html('Matching').css('color', 'green');
+            } else
+                $('#errorMessage').html('Not Matching').css('color', 'red');
+            });
+        });
+    </script>
+
+    @using (Html.BeginForm())
+    {
+    <fieldset>
+        <legend>Register</legend>
+        <div>
+            @Html.ValidationSummary(true, "The Error:", new { @class = "text-danger" })
+        </div>
+
+        <table>
+            <tr>
+                <th>@Html.LabelFor(model => model.FirstName)</th>
+                <th>@Html.TextBoxFor(model => model.FirstName)</th>
+                <th>@Html.ValidationMessageFor(model => model.FirstName)</th>
+            </tr>
+            <tr>
+                <th>@Html.LabelFor(model => model.LastName)</th>
+                <th>@Html.TextBoxFor(model => model.LastName)</th>
+                <th>@Html.ValidationMessageFor(model => model.LastName)</th>
+            </tr>
+            <tr>
+                <th>@Html.LabelFor(model => model.UserName)</th>
+                <th>@Html.TextBoxFor(model => model.UserName)</th>
+                <th>@Html.ValidationMessageFor(model => model.UserName)</th>
+            </tr>
+            <tr>
+                <th>@Html.LabelFor(model => model.Password)</th>
+                <th>@Html.PasswordFor(model => model.Password)</th>
+                <th>@Html.ValidationMessageFor(model => model.Password)</th>
+            </tr>
+            <tr>
+                <th>@Html.LabelFor(model => model.PasswordValidation)</th>
+                <th>@Html.PasswordFor(model => model.PasswordValidation)</th>
+                <th>@Html.ValidationMessageFor(model => model.PasswordValidation)</th>
+            </tr>
+            <tr>
+                <th>@Html.LabelFor(model => model.Birthdate)</th>
+                <th>@Html.EditorFor(model => model.Birthdate)</th>
+                <th>@Html.ValidationMessageFor(model => model.Birthdate)</th>
+            </tr>
+            <tr>
+                <th>@Html.LabelFor(model => model.Email)</th>
+                <th>@Html.TextBoxFor(model => model.Email)</th>
+                <th>@Html.ValidationMessageFor(model => model.Email)</th>
+            </tr>
+
+        </table>
+        <br />
+        @if (Request.Cookies["user"] == null)
+    {
+        <input type="submit" value="Subscribe" />
+}
+else
+{
+    <input type="submit" value="Update" />
+}
+
+    </fieldset>
+    }
+
+
+
+}
+
+

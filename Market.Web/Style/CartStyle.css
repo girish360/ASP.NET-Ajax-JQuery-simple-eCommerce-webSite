@@ -1,0 +1,11 @@
+﻿table {
+    width: 60%;
+    rules: rows;
+    align: center;
+}
+
+th.tableTitle{
+    border-bottom:solid 1px;
+    border-bottom:solid 1px;
+    margin-bottom:2px
+}

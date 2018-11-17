@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2026
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "ClassLibrary\DAL.csproj", "{64B5E9E7-5E30-4DA8-8F96-E0A3325ACB2D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Market.Web", "Market.Web\Market.Web.csproj", "{880DD974-B49F-4723-8D3C-3EC49D2EC96C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{64B5E9E7-5E30-4DA8-8F96-E0A3325ACB2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64B5E9E7-5E30-4DA8-8F96-E0A3325ACB2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64B5E9E7-5E30-4DA8-8F96-E0A3325ACB2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64B5E9E7-5E30-4DA8-8F96-E0A3325ACB2D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{880DD974-B49F-4723-8D3C-3EC49D2EC96C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{880DD974-B49F-4723-8D3C-3EC49D2EC96C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{880DD974-B49F-4723-8D3C-3EC49D2EC96C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{880DD974-B49F-4723-8D3C-3EC49D2EC96C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FD0B5758-02A2-4F15-A500-6016331971E1}
+	EndGlobalSection
+EndGlobal
